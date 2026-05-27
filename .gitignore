@@ -1,0 +1,15 @@
+pysage-env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.vscode/
+.idea/
+*.log
+*.sqlite3
+chroma_db/
+.streamlit/
+dist/
+build/
+*.egg-info/
