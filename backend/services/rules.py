@@ -1,5 +1,6 @@
 RULES = {
     "ModuleNotFoundError": {
+        "id": "PY001",
         "category": "Missing Dependency",
         "confidence": 0.98,
         "root_cause": "Required Python package is not installed.",
@@ -11,17 +12,19 @@ RULES = {
     },
 
     "ImportError": {
+        "id": "PY002",
         "category": "Import Error",
         "confidence": 0.92,
         "root_cause": "Python could not import the requested module or object.",
         "fixes": [
-            "Check the installed package version.",
+            "Check installed package version.",
             "Verify import syntax.",
-            "Read the library release notes."
+            "Review library documentation."
         ]
     },
 
     "FileNotFoundError": {
+        "id": "PY003",
         "category": "File System",
         "confidence": 0.95,
         "root_cause": "Specified file or directory does not exist.",
@@ -33,6 +36,7 @@ RULES = {
     },
 
     "TypeError": {
+        "id": "PY004",
         "category": "Programming Error",
         "confidence": 0.90,
         "root_cause": "An operation received an unexpected object type.",

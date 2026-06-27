@@ -2,6 +2,9 @@ from backend.services.rules import RULES
 
 
 def generate_diagnosis(parsed_traceback: dict):
+    """
+    Generate a diagnosis from parsed traceback information.
+    """
 
     exception = parsed_traceback.get("exception")
     message = parsed_traceback.get("message")
@@ -19,15 +22,15 @@ def generate_diagnosis(parsed_traceback: dict):
         }
 
     diagnosis = {
+        "rule_id": rule["id"],
         "category": rule["category"],
-        "confidence": rule["confidence"],
         "root_cause": rule["root_cause"],
+        "confidence": rule["confidence"],
         "suggested_fixes": rule["fixes"]
     }
 
-    # Special handling for ModuleNotFoundError
-    if exception == "ModuleNotFoundError":
-
+    # Dynamic handling for ModuleNotFoundError
+    if exception == "ModuleNotFoundError" and message:
         package = ""
 
         if "'" in message:
