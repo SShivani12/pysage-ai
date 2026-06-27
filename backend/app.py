@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from backend.routes.diagnose import router as diagnose_router
 
 app = FastAPI(
     title="PySage AI",
@@ -6,6 +7,11 @@ app = FastAPI(
     version="0.1.0"
 )
 
+app.include_router(
+    diagnose_router,
+    prefix="/api",
+    tags=["Diagnosis"]
+)
 
 @app.get("/")
 def root():
