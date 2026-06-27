@@ -1,6 +1,8 @@
 from fastapi import APIRouter, UploadFile, File
+
 from backend.services.traceback_parser import parse_traceback
 from backend.services.diagnosis_engine import generate_diagnosis
+from backend.services.requirements_parser import parse_requirements
 
 router = APIRouter()
 
@@ -19,3 +21,14 @@ async def diagnose_log(file: UploadFile = File(...)):
         "traceback": parsed_traceback,
         "diagnosis": diagnosis
     }
+
+
+@router.post("/analyze-requirements")
+async def analyze_requirements(file: UploadFile = File(...)):
+    content = await file.read()
+
+    parsed_requirements = parse_requirements(
+        content.decode("utf-8")
+    )
+
+    return parsed_requirements
