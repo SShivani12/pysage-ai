@@ -1,3 +1,4 @@
+from backend.services.dependency_analyzer import analyze_dependencies
 from fastapi import APIRouter, UploadFile, File
 
 from backend.services.traceback_parser import parse_traceback
@@ -31,4 +32,11 @@ async def analyze_requirements(file: UploadFile = File(...)):
         content.decode("utf-8")
     )
 
-    return parsed_requirements
+    dependency_analysis = analyze_dependencies(
+        parsed_requirements
+    )
+
+    return {
+        "packages": parsed_requirements["packages"],
+        "analysis": dependency_analysis
+    }
