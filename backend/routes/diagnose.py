@@ -1,3 +1,5 @@
+from backend.services.analysis_pipeline import analyze_input
+from backend.services.analysis_pipeline import analyze_input
 from backend.services.dependency_analyzer import analyze_dependencies
 from fastapi import APIRouter, UploadFile, File
 
@@ -40,3 +42,27 @@ async def analyze_requirements(file: UploadFile = File(...)):
         "packages": parsed_requirements["packages"],
         "analysis": dependency_analysis
     }
+@router.post("/analyze")
+async def analyze(file: UploadFile = File(...)):
+    content = await file.read()
+
+    result = analyze_input(
+        content.decode("utf-8")
+    )
+
+    return result
+@router.post("/analyze")
+async def analyze(file: UploadFile = File(...)):
+    """
+    Unified analysis endpoint.
+    Automatically detects the uploaded file type and routes it
+    through the appropriate analysis pipeline.
+    """
+
+    content = await file.read()
+
+    result = analyze_input(
+        content.decode("utf-8")
+    )
+
+    return result
